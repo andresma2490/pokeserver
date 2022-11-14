@@ -1,6 +1,8 @@
-const { Router } = require("express");
-const router = Router();
+const express = require("express");
+const app = express();
 
-router.get("/", (req, res) => res.json({ message: "hello" }));
+const pokemonRoutes = require("./pokemon.routes");
 
-module.exports = router;
+app.use("/", pokemonRoutes);
+
+module.exports = app;
