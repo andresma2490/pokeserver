@@ -1,10 +1,15 @@
 const express = require("express");
-const app = express();
 
-const pokemonRoutes = require("./pokemon.routes");
+const authRoutes = require("./auth.routes");
 const userRoutes = require("./user.routes");
+const pokemonRoutes = require("./pokemon.routes");
 
-app.use("/", pokemonRoutes);
-app.use("/", userRoutes);
+function apiRouter(app) {
+  const router = express.Router();
+  app.use("/api/v2", router);
+  router.use("/", authRoutes);
+  router.use("/", userRoutes);
+  router.use("/", pokemonRoutes);
+}
 
-module.exports = app;
+module.exports = apiRouter;

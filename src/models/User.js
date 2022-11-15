@@ -24,13 +24,13 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.statics.encryptPassword = async (password) => {
+userSchema.methods.encryptPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 };
 
-userSchema.statics.comparePassword = async (password, receivedPassword) => {
-  return await bcrypt.compare(password, receivedPassword);
+userSchema.methods.comparePassword = async (password, hash) => {
+  return await bcrypt.compare(password, hash);
 };
 
 userSchema.pre("save", async function (next) {
