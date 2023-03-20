@@ -1,8 +1,8 @@
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const AnonymousStrategy = require("passport-anonymous");
-const { Strategy, ExtractJwt } = require("passport-jwt");
-const User = require("../models/User");
+import passport from "passport";
+import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as AnonymousStrategy } from "passport-anonymous";
+import { Strategy, ExtractJwt } from "passport-jwt";
+import User from "../models/User";
 
 passport.use(
   "login",

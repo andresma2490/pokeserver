@@ -1,5 +1,5 @@
-const bcrypt = require("bcryptjs");
-const mongoose = require("mongoose");
+import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -34,7 +34,7 @@ userSchema.methods.comparePassword = async (password, hash) => {
 };
 
 userSchema.pre("save", async function (next) {
-  const user = this;
+  const user = this as any; // TO DO remove "any" type
   if (!user.isModified("password")) {
     return next();
   }
@@ -43,4 +43,4 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-module.exports = mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);

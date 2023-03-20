@@ -1,9 +1,9 @@
-const { replaceDomain } = require("../utils/helpers.utils");
-const { Router } = require("express");
+import { replaceDomain } from "../utils/helpers.utils";
+import { Router } from "express";
 const router = Router();
-const passport = require("passport");
+import passport from "passport";
 
-const pokemonService = require("../services/pokemon.service");
+import pokemonService from "../services/pokemon.service";
 
 router.get(
   "/",
@@ -50,4 +50,4 @@ router.get(
   }
 );
 
-module.exports = router;
+export default router;

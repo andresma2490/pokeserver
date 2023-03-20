@@ -1,8 +1,8 @@
-const axios = require("axios");
+import axios from "axios";
 const baseUrl = `${process.env.POKEAPI_URL}/${process.env.POKEAPI_VERSION}/pokemon`;
 
 class PokemonService {
-  list(limit, offset) {
+  list(limit: unknown = null, offset: unknown = null) {
     return axios.get(
       `${baseUrl}/?${limit ? "limit=" + limit : ""}${
         offset ? "&offset=" + offset : ""
@@ -15,4 +15,4 @@ class PokemonService {
   }
 }
 
-module.exports = new PokemonService();
+export default new PokemonService();

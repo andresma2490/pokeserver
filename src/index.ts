@@ -1,8 +1,8 @@
-const express = require("express");
-const morgan = require("morgan");
-const passport = require("passport");
-const apiRouter = require("./routes/index.routes");
-const cors = require("cors");
+import express from "express";
+import morgan from "morgan";
+import passport from "passport";
+import apiRouter from "./routes/index.routes";
+import cors from "cors";
 const app = express();
 
 // config

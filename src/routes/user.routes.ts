@@ -1,7 +1,7 @@
-const { Router } = require("express");
+import { Router } from "express";
 const router = Router();
 
-const userService = require("../services/user.service");
+import userService from "../services/user.service";
 
 router.post("/register", (req, res) => {
   userService
@@ -13,4 +13,4 @@ router.post("/register", (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

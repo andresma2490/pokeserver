@@ -1,7 +1,7 @@
-const { Router } = require("express");
+import { Router } from "express";
 const router = Router();
-const passport = require("passport");
-const { signToken } = require("../utils/jwt.utils");
+import passport from "passport";
+import { signToken } from "../utils/jwt.utils";
 
 router.post("/login", async (req, res, next) => {
   passport.authenticate(
@@ -16,7 +16,7 @@ router.post("/login", async (req, res, next) => {
           sub: user.id,
           role: user.role,
         };
-        const token = signToken(payload, process.env.JWT_SECRET);
+        const token = signToken(payload);
 
         res.json({ token });
       } catch (error) {
@@ -26,4 +26,4 @@ router.post("/login", async (req, res, next) => {
   )(req, res, next);
 });
 
-module.exports = router;
+export default router;
