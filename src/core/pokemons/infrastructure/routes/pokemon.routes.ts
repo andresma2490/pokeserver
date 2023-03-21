@@ -1,15 +1,17 @@
-import { replaceDomain } from "../utils/helpers.utils";
-import { Router } from "express";
-const router = Router();
 import passport from "passport";
-
-import pokemonService from "../services/pokemon.service";
+import { Router } from "express";
+import { replaceDomain } from "../../../../shared/utils/helpers.utils";
+import { PokemonRepository } from "../repositories/pokemon.repository";
+import { PokemonUseCases } from "../../application/pokemon.useCases";
+const router = Router();
+const pokemonRepository = new PokemonRepository();
+const pokemonUseCases = new PokemonUseCases(pokemonRepository);
 
 router.get(
   "/",
   passport.authenticate(["jwt", "anonymous"], { session: false }),
   (req, res) => {
-    pokemonService
+    pokemonUseCases
       .list()
       .then((response) => {
         const data = response.data;
@@ -25,7 +27,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { limit, offset } = req.query;
-    pokemonService
+    pokemonUseCases
       .list(limit, offset)
       .then((response) => {
         const data = response.data;
@@ -41,7 +43,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { id } = req.params;
-    pokemonService
+    pokemonUseCases
       .get(id)
       .then((response) => {
         return res.json(response.data);

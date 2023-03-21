@@ -1,7 +1,7 @@
 import { Router } from "express";
-const router = Router();
 import passport from "passport";
-import { signToken } from "../utils/jwt.utils";
+import { signToken } from "../../../../shared/utils/jwt.utils";
+const router = Router();
 
 router.post("/login", async (req, res, next) => {
   passport.authenticate(

@@ -1,8 +1,8 @@
 import passport from "passport";
-import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as AnonymousStrategy } from "passport-anonymous";
 import { Strategy, ExtractJwt } from "passport-jwt";
-import User from "../models/User";
+import { UserRepository } from "../core/users/infrastructure/repositories/user.repository";
 
 passport.use(
   "login",
@@ -13,7 +13,7 @@ passport.use(
     },
     async (nickname, password, done) => {
       try {
-        const user = await User.findOne({ nickname });
+        const user = await UserRepository.findOne({ nickname });
 
         if (!user) {
           return done(null, false, { message: "User not found" });

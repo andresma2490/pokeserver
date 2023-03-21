@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import passport from "passport";
-import apiRouter from "./routes/index.routes";
+import apiRouter from "./index.routes";
 import cors from "cors";
 const app = express();
 

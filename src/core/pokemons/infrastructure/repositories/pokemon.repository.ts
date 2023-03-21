@@ -1,8 +1,9 @@
 import axios from "axios";
+import { PokemonRepositoryI } from "../../domain/pokemon.repository";
 const baseUrl = `${process.env.POKEAPI_URL}/${process.env.POKEAPI_VERSION}/pokemon`;
 
-class PokemonService {
-  list(limit: unknown = null, offset: unknown = null) {
+export class PokemonRepository implements PokemonRepositoryI {
+  list(limit: unknown = null, offset: unknown = null): Promise<any> {
     return axios.get(
       `${baseUrl}/?${limit ? "limit=" + limit : ""}${
         offset ? "&offset=" + offset : ""
@@ -10,9 +11,7 @@ class PokemonService {
     );
   }
 
-  get(nameOrId) {
+  get(nameOrId: string): Promise<any> {
     return axios.get(`${baseUrl}/${nameOrId}`);
   }
 }
-
-export default new PokemonService();
